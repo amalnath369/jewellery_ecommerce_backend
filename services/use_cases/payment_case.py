@@ -22,8 +22,8 @@ class PaymentService:
             return payment
         raise PaymentNotFound(f'Payment with id {payment_id} not found')
     
-    
-    
+
+
     async def mark_payment_completed(self, payment_id : int, status : PaymentStatus) -> Optional[Payment]:
         payment = await self.payment_repository.get_by_id(payment_id)
         if payment:
@@ -32,3 +32,23 @@ class PaymentService:
             return updated_payment
         return PaymentNotFound(f'no payment with id {payment_id} found')
     
+    async def delete(self, payment_id : int) -> None:
+        payment = await self.payment_repository.get_by_id(payment_id)
+        if payment:
+            await self.payment_repository.delete(payment)
+            return
+        raise PaymentNotFound(f'Payment with id {payment_id} not found')
+    
+
+    async def list_all_payments(self) -> List[Payment]:
+        payments = await self.payment_repository.list_all()
+        return payments
+    
+    async def list_payment_by_user(self, user_id : int) -> List[Payment]:
+        payments = await self.payment_repository.list_by_user(user_id)
+        return payments
+    
+    async def search(self, term : str) -> Optional[Payment]:
+        payments = await self.payment_repository.search(term)
+        return payments
+        
