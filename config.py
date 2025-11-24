@@ -6,6 +6,8 @@ class Settings(BaseSettings):
     APP_NAME: str = "Jewellery Store API"
     ENV: str = "development"
 
+    SECRET_KEY: str 
+
     #DB
     DATABASE_URL: AnyUrl = "sqlite+aiosqlite:///./jewellery_store.db"
 
