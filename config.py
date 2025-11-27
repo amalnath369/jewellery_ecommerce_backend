@@ -9,7 +9,7 @@ class Settings(BaseSettings):
     SECRET_KEY: str 
 
     #DB
-    DATABASE_URL: AnyUrl = "sqlite+aiosqlite:///./jewellery_store.db"
+    DATABASE_URL: str = "sqlite+aiosqlite:///./jewellery_store.db"
 
     class Config:
         env_file = ".env"
